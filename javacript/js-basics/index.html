@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <h1>JavaScript var, let , const Variables Example.</h1>
+    
+    <script>
+        // var: function-scoped or globally scoped
+        var name = "Alice";
+        console.log(name);//Alice
+        
+        var name = "Bob";
+        console.log(name);//Bob
+
+
+        //let: block-scoped
+        let age = 25;
+        console.log(age);//25
+
+        //let age = 30; X error: Cannot reduce re-declare 'age' with let
+         age = 30;//Re-assignment allowed
+        console.log(age);//30
+
+        //const: block-scoped, must be intialized, cannot be assigned
+        const country = "USA";
+        console.log(country);//USA
+
+        //country = "Canada"; X Error: Must Assignment to constant variable
+
+        //const City: X Error: Must be intialized
+
+        //Scope Difference Example
+        function testVarLetConst(){
+            if(true){
+                var a = 10;
+                let b = 20;
+                const c = 30;
+                
+            }
+            console.log(a);
+            // console.log(b);// Error:let is block scoped
+            // console.log(c);// Error:const is block scoped
+            
+            
+        }
+        testVarLetConst();// Call testVarLetConst function
+
+        // TDZ = Temporal Dead Zone: Variable Example
+        // console.log(name2);// Reference Error
+        // let name2 = "Alice";
+        console.log(name2);
+         var name2 = "Alice";
+        
+        
+        
+
+        
+        
+
+
+      </script>
+</body>
+</html>
