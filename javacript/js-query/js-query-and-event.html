@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Inline JS</title>
+  </head>
+  <body>
+    <ul>
+      <li>document.querySelector</li>
+      <li>getElementById</li>
+      <li>classList</li>
+      <li>Changing HTML content and styles</li>
+      <li>Event handling (click, input, etc.)</li>
+      <li>Creating and removing elements</li>
+    </ul>
+
+    <p id="greeting">Hello!</p>
+    <div class="box">Box</div>
+    <h1>Heading h1</h1>
+    <button id="btn">Click Me</button>
+    <input type="text" id="nameInput" />
+    <p id="displayName"></p>
+    <div id="container">
+
+    </div>
+    <script>
+      //Selecting Elements
+      //getElementById
+      let para = document.getElementById("greeting");
+
+      //querySelector (CSS selector)
+      let box = document.querySelector(".box"); // Selects the first .box
+      //2.classList
+      box.classList.add("highlight"); // Add a class
+      box.classList.remove("highlight"); // Remove a class
+      box.classList.toggle("active"); // Toggle a class on/off
+
+      //3.Changing HTML Content and Styles
+      let heading = document.querySelector("h1");
+      heading.textContent = "New Heading"; // Change text
+      heading.style.color = "blue"; // Change style
+      heading.style.fontSize = "30px"; // Style property
+
+      //4. Event Handling 
+      //click Event
+      document.getElementById("btn").addEventListener("click", () => {
+        alert("Button clicked!");
+      });
+
+      //input Event
+      let input = document.getElementById("nameInput");
+      let display = document.getElementById("displayName");
+
+      input.addEventListener("input", () => {
+        display.textContent = "Hello, " + input.value;
+      });
+
+      // Creating and Removing Elements
+      // Create new element
+      let newPara = document.createElement("p");
+      newPara.textContent = "This is a new paragraph.";
+      newPara.style.color = "green";
+
+      // Add to DOM
+      document.getElementById("container").appendChild(newPara);
+
+      // Remove it after 3 seconds
+      setTimeout(() => {
+        newPara.remove(); // Or: container.removeChild(newPara);
+      }, 3000);
+    </script>
+  </body>
+</html>

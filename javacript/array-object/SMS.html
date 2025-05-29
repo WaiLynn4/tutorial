@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Javascript Student Management System Examples</title>
+  </head>
+  <body>
+    <h1>Simple Student Management System</h1>
+    <p>
+      <span style="font-weight: bold">Goal:</span> Store student info, add new
+      students, calculate average score, and display top student.
+    </p>
+    <script>
+      // Array of student objects
+      let students = [
+        { name: "Alice", age: 20, scores: [85, 90, 78] },
+        { name: "Bob", age: 22, scores: [80, 70, 75] },
+        { name: "Charlie", age: 21, scores: [95, 88, 92] },
+      ];
+
+      // Function to calculate average score
+      function calculateAverage(scores) {
+        let total = 0;
+        for (let score of scores) {
+          total += score;
+        }
+        return total / scores.length;
+      }
+
+      // Add a new student
+      function addStudent(name, age, scores) {
+        students.push({ name, age, scores });
+      }
+      
+      // Display all students with average score
+      function showStudents() {
+        students.forEach((student) => {
+          let avg = calculateAverage(student.scores);
+          console.log(
+            `${student.name} (${
+              student.age
+            } years old) - Avg Score: ${avg.toFixed(2)}`
+          );
+        });
+      }
+
+      // Find the top student
+      function showTopStudent() {
+        let topStudent = students[0];
+        let topAvg = calculateAverage(topStudent.scores);
+
+        for (let student of students) {
+          let avg = calculateAverage(student.scores);
+          if (avg > topAvg) {
+            topAvg = avg;
+            topStudent = student;
+          }
+        }
+
+   
+        const { name, age } = topStudent;
+        console.log(
+          ` Top Student: ${name} (${age} yrs) with Avg Score: ${topAvg.toFixed(
+            2
+          )}`
+        );
+      }
+
+      // Call functions
+      addStudent("David", 23, [88, 82, 91]);
+      console.log('after added', students)
+      showStudents();
+      showTopStudent();
+    </script>
+  </body>
+</html>

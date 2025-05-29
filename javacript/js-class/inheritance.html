@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Inheritance</title>
+</head>
+<body>
+    <h1>Class Inheritance</h1>
+    <script>
+        class Car {
+            constructor(brand,year) {
+                this.brand = brand;
+                this.year = year;
+            }
+        }
+
+        class SportCar extends Car {
+            constructor(brand,year,maxspeed){
+                super(brand,year);
+                this.maxspeed = maxspeed;
+            }
+
+        }
+        const sportCar = new SportCar("Toyota",2010,1000);
+
+    </script>
+</body>
+</html>
