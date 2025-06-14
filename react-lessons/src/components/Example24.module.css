@@ -1,0 +1,62 @@
+.container {
+    padding: 10px
+}
+
+.taskList {
+    margin-top: 20px;
+}
+
+.listItem {
+    margin-top: 10;
+}
+
+.taskInput {
+    height: 40px;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.addTaskBtn {
+    padding: 10px;
+    width: 100px;
+    background-color: green;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.updateTaskBtn {
+    padding: 10px;
+    width: 100px;
+    background-color: orange;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.cancelBtn {
+    background-color: gray;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+
+.editBtn {
+    background-color: #007bff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.removeBtn {
+    background-color: red;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.taskName {
+    padding: 10px;
+}

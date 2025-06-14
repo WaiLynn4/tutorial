@@ -1,0 +1,15 @@
+.header{
+    color: red;
+}
+
+.name{
+    color: blue;
+    padding: 10;
+    font-size: 20px;
+}
+
+.userInput{
+    height: 50px;
+    border: "1px solid black";
+    border-radius: 5px;
+}
