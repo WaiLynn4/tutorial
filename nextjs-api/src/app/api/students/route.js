@@ -1,3 +1,4 @@
+import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import * as yup from "yup";
 
@@ -24,27 +25,39 @@ const StudentData = [
   },
 ];
 
-//Studet List API
+//GET Studet List API
 export async function GET() {
-  return NextResponse.json(StudentData);
+  const students = await prisma.student.findMany();
+  return NextResponse.json(students);
 }
 
 //Validation schema to validate client requests.
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
-  fatherName: yup.string().required("Father Name is required"),
-  address: yup.string().required("Address is required"),
+  father_name: yup.string().required("Father Name is required"),
+  gender: yup
+    .string()
+    .required("Gender is required")
+    .oneOf(["male", "female"], "Invalid Gender"),
+
   age: yup.number().required("Age is required"),
+  dob: yup.date().required("DOB is required"),
+  phone: yup.string().required("Phone is required"),
+  address: yup.string().required("Address is required"),
   major: yup.string().required("Major is required"),
 });
 
 export async function POST(req) {
   try {
     const body = await req.json(); //Get requested body data from client
-    await schema.validate(body, { abortEarly: false });
+    const validatedData = await schema.validate(body, { abortEarly: false});
+    const student = await prisma.student.create({
+      data: validatedData,
+    });
     return NextResponse.json({
       message: "Student is successfully created.",
-      bodyData: body,
+      student: student,
+ 
     });
   } catch (error) {
     // return NextResponse.json(

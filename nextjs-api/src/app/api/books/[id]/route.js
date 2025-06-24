@@ -1,3 +1,4 @@
+import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import * as yup from "yup";
 
@@ -5,22 +6,27 @@ import * as yup from "yup";
 const schema = yup.object().shape({
   title: yup.string().required("Title is required"),
   author: yup.string().required("Author is required"),
-  publicyear: yup.number().required("Public Year is required"),
-  
+  published_year: yup.number().required("Public Year is required"),
 });
 
-export async function PUT (req, { params }) {
-   try{ 
-     const bookId = params.id; // get URI params field;
+export async function PUT(req, { params }) {
+  try {
+    const bookId = parseInt(params.id); // get URI params field;
     const body = await req.json();
-    await schema.validate(body, { abortEarly: false });
-    return NextResponse.json({
-        message: "Book is successfully updated.",
-        bookId,
-        bodyData: body,
+    const validatedData = await schema.validate(body, {
+      abortEarly: false,
+      stripUnknown: true,
     });
-   } catch(error) {
-     if (error.name === "ValidationError") {
+    await prisma.book.update({
+      where: { id: bookId },
+      data: validatedData,
+    });
+    return NextResponse.json({
+      message: "Book is successfully updated.",
+      bookId,
+    });
+  } catch (error) {
+    if (error.name === "ValidationError") {
       return NextResponse.json(
         {
           message: "validation failed",
@@ -40,28 +46,45 @@ export async function PUT (req, { params }) {
       { status: 500 }
     );
   }
-   }
-
-
-export async function DELETE(req, {params }) {
-    const bookId = params.id;// get URI params field;
-    return NextResponse.json({
-        message: "Book is successfully deleted",
-        bookId,
-    });
-    
 }
 
-export async function GET(req, {params }) {
-    const bookId = params.id;// get URI params field;
-    const book = {
-    title: "Power ranger",
-    author: "Ash",
-    publicyear: "1954"
-    };
-    return NextResponse.json({
-        message: 'Book detail is successfully get',
-        book,
+export async function DELETE(req, { params }) {
+  const bookId = parseInt(params.id); // get URI params field;
+  try {
+    await prisma.book.delete({
+      where: { id: bookId },
     });
-    
+
+    return NextResponse.json({
+      message: "Book is successfully deleted",
+      bookId,
+    });
+  } catch (error) {
+    return NextResponse.json(
+      {
+        message: "Student not dound or Student deletion is fail.",
+      },
+      {
+        status: 404,
+      }
+    );
+  }
+}
+
+export async function GET(req, { params }) {
+  const bookId = parseInt(params.id); // get URI params field;
+  const book = await prisma.book.findUnique({
+    where: {
+      id: bookId,
+    },
+  });
+  // const book = {
+  // title: "Power ranger",
+  // author: "Ash",
+  // publicyear: "1954"
+  // };
+  return NextResponse.json({
+    message: "Book detail is successfully get",
+    book,
+  });
 }
