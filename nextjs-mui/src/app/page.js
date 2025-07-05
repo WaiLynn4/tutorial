@@ -42,7 +42,9 @@ export default function Home() {
       {/* <NavLayout/> */}
       {/* <BasicForm/> */}
   
-    <ContactForm />
+    {/* <ContactForm /> */}
+    <MUIContainer/>
+
    
 
     </div>

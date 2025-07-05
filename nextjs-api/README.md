@@ -37,3 +37,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 -npm install yup
 -npx prisma generate
+npm install @mui/icons-material

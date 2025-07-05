@@ -7,7 +7,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <AppRouterCacheProvider>
-          <StyledRoot>{children}</StyledRoot>
+          <StyledRoot>
+            <DrawerNav/>
+            {children}</StyledRoot>
           </AppRouterCacheProvider>
         
       </body>
